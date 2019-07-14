@@ -27,7 +27,6 @@ const onModalSave = () => {
   api.post('updateTranslation', params, submission)
     .then((responseData) => {
       reloadLocation();
-      // console.log(responseData);
     });
 };
 
@@ -45,18 +44,17 @@ const translateOnClick = (evt) => {
   const id = target.getAttribute('data-id') || '';
   const fromLang = target.getAttribute('data-fromlang') || '';
   const toLang = target.getAttribute('data-tolang') || '';
+  const propertyName = target.getAttribute('data-propertyname') || 'text';
   displayModal(confirmModal, { fromLang, toLang }, () => {
     const params = {
-      propertyName: 'text',
+      propertyName,
       id,
       fromLang,
       toLang,
     };
-    api.post(params)
+    api.post('translate', params)
       .then(() => {
-        // closeModal();
         reloadLocation();
-        // location.reload(true);
       });
   });
 };

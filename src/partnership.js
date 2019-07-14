@@ -31,11 +31,10 @@ const onModalSaveJurisdictions = () => {
 
 const onModalSaveString = (apiRouteName) => {
   const { data, submission } = parseForm();
-  console.log(data, submission);
-  // api.post(apiRouteName, { id: data.id, lang: LANG }, submission)
-  //   .then((responseData) => {
-  //     console.log(responseData);
-  //   });
+  api.post(apiRouteName, { id: data.id, lang: LANG }, submission)
+    .then((responseData) => {
+      reloadLocation();
+    });
 };
 
 /**
@@ -144,7 +143,6 @@ module.exports = {
         if (!name) return; // don't submit a blank name TODO: issue a warning
         const params = {
           modelName: 'partnership',
-          methodName: 'insert',
           regionId: REGION_ID,
           lang: LANG,
         };

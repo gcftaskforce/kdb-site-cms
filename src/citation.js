@@ -14,7 +14,6 @@ const onModalSave = () => {
   const { data, submission } = parseForm();
   api.post('updateCitation', { id: data.id }, submission)
     .then((responseData) => {
-      // console.log(responseData);
       reloadLocation();
     });
 };

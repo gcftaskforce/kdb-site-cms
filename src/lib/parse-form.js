@@ -14,7 +14,7 @@ module.exports = () => {
     }
   }
   Array.prototype.slice.call(document.getElementsByClassName('entity-property')).forEach((ele) => {
-    const propertyName = ele.getAttribute('data-property');
+    const propertyName = ele.getAttribute('data-propertyname');
     if (!propertyName) return;
     if (!objectHasProperty(context.submission, propertyName)) context.submission[propertyName] = {};
     const rowId = ele.getAttribute('data-row-id');

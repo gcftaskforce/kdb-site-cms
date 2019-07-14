@@ -23,11 +23,10 @@ const onModalSave = () => {
     id: data.id,
     lang: LANG,
   };
-  console.log(submission);
-  // api.post('updateTranslation', params, submission)
-  //   .then((responseData) => {
-  //     reloadLocation();
-  //   });
+  api.post('updateTranslation', params, submission)
+    .then((responseData) => {
+      reloadLocation();
+    });
 };
 
 const editOnClick = (evt) => {
@@ -53,11 +52,10 @@ const translateOnClick = (evt) => {
       fromLang,
       toLang,
     };
-    console.log(params);
-    // api.post('translate', params)
-    //   .then(() => {
-    //     reloadLocation();
-    //   });
+    api.post('translate', params)
+      .then(() => {
+        reloadLocation();
+      });
   });
 };
 
