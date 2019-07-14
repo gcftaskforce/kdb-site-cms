@@ -23,11 +23,11 @@ const onModalSave = () => {
     id: data.id,
     lang: LANG,
   };
-  api.post('updateTranslation', params, submission)
-    .then((responseData) => {
-      // console.log(responseData);
-      reloadLocation();
-    });
+  console.log(submission);
+  // api.post('updateTranslation', params, submission)
+  //   .then((responseData) => {
+  //     reloadLocation();
+  //   });
 };
 
 const editOnClick = (evt) => {
@@ -75,7 +75,6 @@ module.exports = {
       const timestamps = (ele.getAttribute('data-timestamps') || '').split(',');
       const timestamp = findTimestamp(timestamps, propertyName, LANG);
       const isGoogleTranslation = isGoogleTimestamp(timestamp);
-      // console.log(timestamps);
       SRC_LANGS.forEach((lang) => {
         appendButton(ele, {
           text: lang.toUpperCase(),
@@ -96,7 +95,6 @@ module.exports = {
         data: {
           id,
           propertyName,
-          // lang: LANG,
         },
       });
       if (isGoogleTranslation) {

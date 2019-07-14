@@ -36,10 +36,9 @@ module.exports = () => {
   });
   // read Summernote instances to get rich text (HTML)
   Array.prototype.slice.call(document.getElementsByClassName('summernote')).forEach((ele) => {
-    const idSegments = (ele.getAttribute('id') || '').split('.');
-    if (idSegments.length < 2) return;
-    if (idSegments[0] !== 'summernote') return;
-    context.submission[idSegments[1]] = $(ele).summernote('code');
+    const propertyName = ele.getAttribute('data-propertyname');
+    if (!propertyName) return;
+    context.submission[propertyName] = $(ele).summernote('code');
   });
   return context;
 };

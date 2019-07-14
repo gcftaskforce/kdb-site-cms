@@ -31,10 +31,11 @@ const onModalSaveJurisdictions = () => {
 
 const onModalSaveString = (apiRouteName) => {
   const { data, submission } = parseForm();
-  api.post(apiRouteName, { id: data.id, lang: LANG }, submission)
-    .then((responseData) => {
-      console.log(responseData);
-    });
+  console.log(data, submission);
+  // api.post(apiRouteName, { id: data.id, lang: LANG }, submission)
+  //   .then((responseData) => {
+  //     console.log(responseData);
+  //   });
 };
 
 /**

@@ -1,10 +1,15 @@
 <%
   const rec = locals.rec || {};
-  const propertyName = locals.propertyName || '';
+  const propertyName = locals.propertyName || 'string';
+  const [propertyBaseName, propertyType] = propertyName.split('.');
   const id = rec.id || '';
-  const property = rec[propertyName] || {};
-  const label = property.label || '';
-  const string = property.string || '';
+  let label = '';
+  let string = '';
+  if (rec[propertyBaseName]) {
+    label = rec[propertyBaseName].label || '';
+    if (propertyType) string = rec[propertyBaseName][propertyType] || '';
+    else string = rec[propertyBaseName];
+  }
 %>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">

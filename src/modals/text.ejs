@@ -1,13 +1,13 @@
 <%
   const rec = locals.rec || {};
-  const propertyName = locals.propertyName || '';
-  const submissionPropertyName = propertyName || 'text';
+  const propertyName = locals.propertyName || 'text';
+  const [propertyBaseName, propertyType] = propertyName.split('.');
   const id = rec.id || '';
   const label = rec.label || '';
   let text = '';
-  if (propertyName && rec[propertyName]) {
-    if (propertyName === 'text') text = rec[propertyName] || '';
-    else text = rec[propertyName].text || '';
+  if (rec[propertyBaseName]) {
+    if (propertyType) text = rec[propertyBaseName][propertyType] || '';
+    else text = rec[propertyBaseName];
   }
 %>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
@@ -20,8 +20,8 @@
         </button>
       </div>
       <div class="modal-body">
-        <form autocomplete="off" spellcheck="false" class="submission" data-id="<%= id %>" data-property="<%= propertyName %>">
-          <div class="summernote summernote-text"  id="summernote.<%= submissionPropertyName %>" data-property="text"><%- text %></div>
+        <form autocomplete="off" spellcheck="false" class="submission" data-id="<%= id %>">
+          <div class="summernote summernote-text"  id="summernote.<%= propertyName %>" data-propertyname="<%= propertyName %>"><%- text %></div>
         </form>
       </div>
       <div class="modal-footer">
