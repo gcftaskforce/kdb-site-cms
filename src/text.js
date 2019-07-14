@@ -53,10 +53,11 @@ const translateOnClick = (evt) => {
       fromLang,
       toLang,
     };
-    api.post('translate', params)
-      .then(() => {
-        reloadLocation();
-      });
+    console.log(params);
+    // api.post('translate', params)
+    //   .then(() => {
+    //     reloadLocation();
+    //   });
   });
 };
 

@@ -1,13 +1,15 @@
 /* eslint-env shared-node-browser */
 /* eslint no-console: 0, no-restricted-globals: 0 */
 
-const citation = require('./citation');
-const contact = require('./contact');
-const value = require('./value');
-const array = require('./array');
-const text = require('./text');
-const framework = require('./framework');
-const partnership = require('./partnership');
+'use strict';
+
+const citation = require('./src/citation');
+const contact = require('./src/contact');
+const value = require('./src/value');
+const array = require('./src/array');
+const text = require('./src/text');
+const framework = require('./src/framework');
+const partnership = require('./src/partnership');
 
 module.exports = {
   render: (apiEndpoint) => {
@@ -20,15 +22,3 @@ module.exports = {
     partnership.render(apiEndpoint);
   },
 };
-
-// const cleanUp = () => {
-//   $('.summernote-text').summernote('destroy');
-//   $('.summernote-citation').summernote('destroy');
-//   $('#modal').modal('dispose');
-//   if (document.getElementById('modal')) document.getElementById('modal').remove();
-// };
-
-// const closeModal = () => {
-//   $('#modal').modal('hide');
-//   // cleanUp();
-// };
