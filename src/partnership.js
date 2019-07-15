@@ -1,16 +1,20 @@
 /* global window document */
 
 const appendButton = require('./lib/append-button');
+const appendIcon = require('./lib/append-icon');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
 const displayModal = require('./lib/display-modal');
-
+const findTimestamp = require('./lib/find-timestamp');
+const formatTimestamp = require('./lib/format-timestamp');
+const isGoogleTimestamp = require('./lib/is-google-timestamp');
+const reloadLocation = require('./lib/reload-location');
+// modals and forms
 const stringModal = require('./modals/string.ejs');
 const confirmModal = require('./modals/translate-confirm.ejs');
 const jurisdictionListModal = require('./modals/partnership-jurisdiction-list.ejs');
 const deleteConfirmModal = require('./modals/partnership-delete-confirm.ejs');
 const partnershipAddForm = require('./forms/partnership-add.ejs');
-const reloadLocation = require('./lib/reload-location');
 
 /**
  * module-level variables "instantiated" in exported render() function
@@ -116,6 +120,7 @@ module.exports = {
 
     Array.prototype.slice.call(document.querySelectorAll('.cms-enabled .partnership-container') || []).forEach((containerEle) => {
       const id = containerEle.getAttribute('id');
+      const timestamps = (containerEle.getAttribute('data-timestamps') || '').split(',');
       // inject delete button
       appendButton(containerEle, {
         className: 'fas fa-sm fa-times-circle',
@@ -133,6 +138,8 @@ module.exports = {
       Array.prototype.slice.call(containerEle.querySelectorAll('.datum-string') || []).forEach((ele) => {
         const eleLang = ele.getAttribute('data-lang');
         const propertyName = ele.getAttribute('data-propertyname');
+        const timestamp = findTimestamp(timestamps, propertyName, LANG);
+        const isGoogleTranslation = isGoogleTimestamp(timestamp);
         // show translate buttons only for translatable content
         if (ele.classList.contains('datum-translatable')) {
           SRC_LANGS.forEach((lang) => {
@@ -152,8 +159,14 @@ module.exports = {
         appendButton(ele, {
           className: 'fas fa-sm fa-edit',
           onClick: stringEditOnClick,
+          title: formatTimestamp(timestamp),
           data: { id, lang: eleLang, propertyName },
         });
+        if (isGoogleTranslation) {
+          appendIcon(ele, {
+            className: 'fab fa-sm fa-google',
+          });
+        }
       });
 
       /**
