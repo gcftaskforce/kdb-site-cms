@@ -12,10 +12,14 @@ const findTimestamp = require('./lib/find-timestamp');
 const formatTimestamp = require('./lib/format-timestamp');
 const isGoogleTimestamp = require('./lib/is-google-timestamp');
 
-const LANG = document.querySelector('html').getAttribute('lang') || 'en';
-const SRC_LANGS = (document.querySelector('body').getAttribute('data-src-langs') || '').split(',');
+/**
+ * module-level variables "instantiated" in exported render() function
+ */
 
 let api;
+
+let LANG;
+let SRC_LANGS;
 
 const onModalSave = () => {
   const { data, submission } = parseForm();
@@ -60,8 +64,10 @@ const translateOnClick = (evt) => {
 };
 
 module.exports = {
-  render: (apiEndpoint) => {
-    api = new API(apiEndpoint);
+  render: (apiEndpointArg, srcLangsArg, langArg) => {
+    api = new API(apiEndpointArg);
+    SRC_LANGS = srcLangsArg;
+    LANG = langArg;
 
     /**
      * Inject the buttons

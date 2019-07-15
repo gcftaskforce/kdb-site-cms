@@ -12,13 +12,13 @@ const framework = require('./src/framework');
 const partnership = require('./src/partnership');
 
 module.exports = {
-  render: (apiEndpoint) => {
-    citation.render(apiEndpoint);
-    contact.render(apiEndpoint);
-    value.render(apiEndpoint);
-    array.render(apiEndpoint);
-    text.render(apiEndpoint);
-    framework.render(apiEndpoint);
-    partnership.render(apiEndpoint);
+  render: (apiEndpoint, srcLangs, lang) => {
+    citation.render(apiEndpoint, srcLangs, lang);
+    contact.render(apiEndpoint, srcLangs, lang);
+    value.render(apiEndpoint, srcLangs, lang);
+    array.render(apiEndpoint, srcLangs, lang);
+    text.render(apiEndpoint, srcLangs, lang);
+    framework.render(apiEndpoint, srcLangs, lang);
+    partnership.render(apiEndpoint, srcLangs, lang);
   },
 };

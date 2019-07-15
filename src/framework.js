@@ -1,4 +1,4 @@
-/* global document CLIENT_API_ENDPOINT */
+/* global document */
 
 const appendButton = require('./lib/append-button');
 const appendIcon = require('./lib/append-icon');
@@ -13,10 +13,14 @@ const findTimestamp = require('./lib/find-timestamp');
 const formatTimestamp = require('./lib/format-timestamp');
 const isGoogleTimestamp = require('./lib/is-google-timestamp');
 
+/**
+ * module-level variables "instantiated" in exported render() function
+ */
+
 let api;
 
-const LANG = document.querySelector('html').getAttribute('lang') || 'en';
-const SRC_LANGS = (document.querySelector('body').getAttribute('data-src-langs') || '').split(',');
+let LANG;
+let SRC_LANGS;
 
 const onModalSave = () => {
   const { data, submission } = parseForm();
@@ -59,8 +63,10 @@ const translateOnClick = (evt) => {
   });
 };
 module.exports = {
-  render: (apiEndpoint) => {
-    api = new API(apiEndpoint);
+  render: (apiEndpointArg, srcLangsArg, langArg) => {
+    api = new API(apiEndpointArg);
+    SRC_LANGS = srcLangsArg;
+    LANG = langArg;
 
     /**
      * Inject the buttons

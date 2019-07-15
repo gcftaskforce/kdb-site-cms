@@ -6,14 +6,19 @@ const parseForm = require('./lib/parse-form');
 const displayModal = require('./lib/display-modal');
 
 const stringModal = require('./modals/string.ejs');
+const confirmModal = require('./modals/translate-confirm.ejs');
 const jurisdictionListModal = require('./modals/partnership-jurisdiction-list.ejs');
 const deleteConfirmModal = require('./modals/partnership-delete-confirm.ejs');
 const partnershipAddForm = require('./forms/partnership-add.ejs');
 const reloadLocation = require('./lib/reload-location');
 
-let api;
+/**
+ * module-level variables "instantiated" in exported render() function
+ */
 
-const LANG = document.querySelector('html').getAttribute('lang') || 'en';
+let LANG;
+let SRC_LANGS;
+let api;
 
 // subheader contains the current region ID in a data attribute
 const REGION_ID = (document.getElementById('subheader-regional'))
@@ -78,9 +83,32 @@ const stringEditOnClick = (evt) => {
     });
 };
 
+const translateOnClick = (evt) => {
+  const target = evt.currentTarget;
+  const id = target.getAttribute('data-id') || '';
+  const fromLang = target.getAttribute('data-fromlang') || '';
+  const toLang = target.getAttribute('data-tolang') || '';
+  const propertyName = target.getAttribute('data-propertyname') || '';
+  displayModal(confirmModal, { fromLang, toLang }, () => {
+    const params = {
+      propertyName,
+      id,
+      fromLang,
+      toLang,
+      type: 'string',
+    };
+    api.post('translate', params)
+      .then(() => {
+        reloadLocation(id);
+      });
+  });
+};
+
 module.exports = {
-  render: (apiEndpoint) => {
-    api = new API(apiEndpoint);
+  render: (apiEndpointArg, srcLangsArg, langArg) => {
+    api = new API(apiEndpointArg);
+    SRC_LANGS = srcLangsArg;
+    LANG = langArg;
 
     /**
      * Process each partnership on the page
@@ -103,12 +131,28 @@ module.exports = {
       */
 
       Array.prototype.slice.call(containerEle.querySelectorAll('.datum-string') || []).forEach((ele) => {
-        const lang = ele.getAttribute('data-lang');
+        const eleLang = ele.getAttribute('data-lang');
         const propertyName = ele.getAttribute('data-propertyname');
+        // show translate buttons only for translatable content
+        if (ele.classList.contains('datum-translatable')) {
+          SRC_LANGS.forEach((lang) => {
+            appendButton(ele, {
+              text: lang.toUpperCase(),
+              title: `Replace with Google translation using ${lang.toLocaleUpperCase()} as the source`,
+              onClick: translateOnClick,
+              data: {
+                id,
+                fromlang: lang,
+                tolang: LANG,
+                propertyName,
+              },
+            });
+          });
+        }
         appendButton(ele, {
           className: 'fas fa-sm fa-edit',
           onClick: stringEditOnClick,
-          data: { id, lang, propertyName },
+          data: { id, lang: eleLang, propertyName },
         });
       });
 
