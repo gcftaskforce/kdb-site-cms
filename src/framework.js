@@ -63,10 +63,9 @@ const translateOnClick = (evt) => {
   });
 };
 module.exports = {
-  render: (apiEndpointArg, srcLangsArg, langArg) => {
-    api = new API(apiEndpointArg);
-    SRC_LANGS = srcLangsArg;
-    LANG = langArg;
+  render: (props) => {
+    api = new API(props.API_ENDPOINT);
+    ({ SRC_LANGS, LANG } = props);
 
     /**
      * Inject the buttons

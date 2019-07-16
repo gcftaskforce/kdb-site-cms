@@ -2,6 +2,7 @@
 
 const appendButton = require('./lib/append-button');
 const appendIcon = require('./lib/append-icon');
+const appendDropdown = require('./lib/append-dropdown');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
 const displayModal = require('./lib/display-modal');
@@ -20,14 +21,16 @@ const partnershipAddForm = require('./forms/partnership-add.ejs');
  * module-level variables "instantiated" in exported render() function
  */
 
-let LANG;
+let LANGS;
 let SRC_LANGS;
+let REGION_ID;
+let LANG;
 let api;
 
-// subheader contains the current region ID in a data attribute
-const REGION_ID = (document.getElementById('subheader-regional'))
-  ? document.getElementById('subheader-regional').getAttribute('data-regionid') || ''
-  : '';
+// // subheader contains the current region ID in a data attribute
+// const REGION_ID = (document.getElementById('subheader-regional'))
+//   ? document.getElementById('subheader-regional').getAttribute('data-regionid') || ''
+//   : '';
 
 const onModalSaveJurisdictions = () => {
   const { data, submission } = parseForm();
@@ -109,10 +112,9 @@ const translateOnClick = (evt) => {
 };
 
 module.exports = {
-  render: (apiEndpointArg, srcLangsArg, langArg) => {
-    api = new API(apiEndpointArg);
-    SRC_LANGS = srcLangsArg;
-    LANG = langArg;
+  render: (props) => {
+    api = new API(props.API_ENDPOINT);
+    ({ LANGS, SRC_LANGS, LANG, REGION_ID } = props);
 
     /**
      * Process each partnership on the page
@@ -120,7 +122,17 @@ module.exports = {
 
     Array.prototype.slice.call(document.querySelectorAll('.cms-enabled .partnership-container') || []).forEach((containerEle) => {
       const id = containerEle.getAttribute('id');
-      const timestamps = (containerEle.getAttribute('data-timestamps') || '').split(',');
+      const timestamps = (containerEle.getAttribute('data-timestamps') || '').split(','); // "timestamps" array for this partnership
+      const dropdownItems = [];
+      LANGS.forEach((lang) => {
+        if (lang === LANG) return;
+        dropdownItems.push([lang.toUpperCase(), `/${lang}/Partnerships/${REGION_ID}/?scrollTo=${id}`]);
+      });
+      appendDropdown(containerEle, {
+        selector: '.box-heading',
+        text: LANG.toUpperCase(),
+        items: dropdownItems,
+      });
       // inject delete button
       appendButton(containerEle, {
         className: 'fas fa-sm fa-times-circle',

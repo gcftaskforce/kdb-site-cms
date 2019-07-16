@@ -28,8 +28,8 @@ const onClick = (evt) => {
 };
 
 module.exports = {
-  render: (apiEndpoint) => {
-    api = new API(apiEndpoint);
+  render: (props) => {
+    api = new API(props.API_ENDPOINT);
 
     /**
      * Inject the buttons

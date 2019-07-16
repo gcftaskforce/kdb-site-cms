@@ -15,17 +15,22 @@ const framework = require('./src/framework');
 const partnership = require('./src/partnership');
 
 // the variables LANG and SRC_LANGS are derived from HTML tag properties (as follows)
-const SRC_LANGS = deserializeArray(document.querySelector('body').getAttribute('data-src-langs')); // all supported langs (serialized array)
+const LANGS = deserializeArray(document.querySelector('body').getAttribute('data-langs')); // all supported langs (serialized array)
+const SRC_LANGS = deserializeArray(document.querySelector('body').getAttribute('data-src-langs')); // langs that can serve as a translation source (serialized array)
+const REGION_ID = document.querySelector('body').getAttribute('data-regionid') || ''; // current region (e.g. brazil | mexico.campeche)
 const LANG = document.querySelector('html').getAttribute('lang') || 'en'; // currently selected lang
 
 module.exports = {
-  render: (apiEndpoint) => {
-    citation.render(apiEndpoint, SRC_LANGS, LANG);
-    contact.render(apiEndpoint, SRC_LANGS, LANG);
-    value.render(apiEndpoint, SRC_LANGS, LANG);
-    array.render(apiEndpoint, SRC_LANGS, LANG);
-    text.render(apiEndpoint, SRC_LANGS, LANG);
-    framework.render(apiEndpoint, SRC_LANGS, LANG);
-    partnership.render(apiEndpoint, SRC_LANGS, LANG);
+  render: (API_ENDPOINT) => {
+    const props = {
+      API_ENDPOINT, LANGS, SRC_LANGS, LANG, REGION_ID,
+    };
+    citation.render(props);
+    contact.render(props);
+    value.render(props);
+    array.render(props);
+    text.render(props);
+    framework.render(props);
+    partnership.render(props);
   },
 };
