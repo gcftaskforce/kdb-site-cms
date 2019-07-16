@@ -100,11 +100,9 @@ module.exports = {
           propertyName,
         },
       });
-      if (isGoogleTranslation) {
-        appendIcon(ele, {
-          className: 'fab fa-sm fa-google',
-        });
-      }
+      appendIcon(ele, {
+        className: (isGoogleTranslation) ? 'fab fa-sm fa-google' : 'fas fa-sm fa-arrows-alt-h',
+      });
     });
   },
 };

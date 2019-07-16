@@ -136,9 +136,11 @@ module.exports = {
       */
 
       Array.prototype.slice.call(containerEle.querySelectorAll('.datum-string') || []).forEach((ele) => {
-        const eleLang = ele.getAttribute('data-lang');
+        const eleLang = ele.getAttribute('data-lang') || '';
+        const isTranslatable = Boolean(eleLang); // only translatable strings will have a lang attribute
         const propertyName = ele.getAttribute('data-propertyname');
-        const timestamp = findTimestamp(timestamps, propertyName, LANG);
+        // timestamp "find" parameters depend on whether or not the field is translatable
+        const timestamp = (isTranslatable) ? findTimestamp(timestamps, propertyName, LANG) : findTimestamp(timestamps, propertyName);
         const isGoogleTranslation = isGoogleTimestamp(timestamp);
         // show translate buttons only for translatable content
         if (ele.classList.contains('datum-translatable')) {
@@ -156,17 +158,17 @@ module.exports = {
             });
           });
         }
+        if (isTranslatable) {
+          appendIcon(ele, {
+            className: (isGoogleTranslation) ? 'fab fa-sm fa-google' : 'fas fa-sm fa-arrows-alt-h',
+          });
+        }
         appendButton(ele, {
           className: 'fas fa-sm fa-edit',
           onClick: stringEditOnClick,
           title: formatTimestamp(timestamp),
           data: { id, lang: eleLang, propertyName },
         });
-        if (isGoogleTranslation) {
-          appendIcon(ele, {
-            className: 'fab fa-sm fa-google',
-          });
-        }
       });
 
       /**
@@ -175,9 +177,11 @@ module.exports = {
 
       const jurisdictionListEle = containerEle.querySelector('.datum-partnership-jurisdictions');
       if (jurisdictionListEle) {
+        const timestamp = findTimestamp(timestamps, 'jurisdictions');
         appendButton(jurisdictionListEle, {
           className: 'fas fa-sm fa-edit',
           onClick: jurisdictionEditOnClick,
+          title: formatTimestamp(timestamp),
           data: { id },
         });
       }

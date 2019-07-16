@@ -37,6 +37,8 @@ Translations made using the *integrated Google translate* feature are recorded a
 
 Timestamps indicating when a field was last changed must be maintained. Timestamps for all translations must likewise be maintained.
 
+Note that timestamps were implemented in mid 2016. All extant data was timestamped `2016-01-01 00:00` at that time.
+
 ### Citations
 
 For data fields that are cited, client must be able to edit the citation content (HTML). Citations are not translated. Changes to citations do not affect the underlying entity's timestamp.
@@ -47,4 +49,4 @@ The *Partnerships* database is a later addition to the *Knowledge Database*. In 
 
 ## Environment
 
-The global ```CLIENT_API_ENDPOINT``` specifying the base URI of the API must be available to the application, usually via webpack plugin .
+The global `CLIENT_API_ENDPOINT` specifying the base URI of the API must be available to the application, usually via webpack plugin .
