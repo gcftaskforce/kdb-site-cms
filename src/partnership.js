@@ -1,7 +1,7 @@
 /* global window document */
 
 const appendButton = require('./lib/append-button');
-const appendIcon = require('./lib/append-icon');
+const appendTranslationBadge = require('./lib/append-translation-badge');
 const appendDropdown = require('./lib/append-dropdown');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
@@ -171,9 +171,7 @@ module.exports = {
           });
         }
         if (isTranslatable) {
-          appendIcon(ele, {
-            className: (isGoogleTranslation) ? 'fab fa-sm fa-google' : 'fas fa-sm fa-arrows-alt-h',
-          });
+          appendTranslationBadge(ele, { isGoogleTranslation });
         }
         appendButton(ele, {
           className: 'fas fa-sm fa-edit',

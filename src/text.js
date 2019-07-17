@@ -1,7 +1,7 @@
 /* global document */
 
 const appendButton = require('./lib/append-button');
-const appendIcon = require('./lib/append-icon');
+const appendTranslationBadge = require('./lib/append-translation-badge');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
 const displayModal = require('./lib/display-modal');
@@ -91,9 +91,7 @@ module.exports = {
           },
         });
       });
-      appendIcon(ele, {
-        className: (isGoogleTranslation) ? 'fab fa-sm fa-google' : 'fas fa-sm fa-arrows-alt-h',
-      });
+      appendTranslationBadge(ele, { isGoogleTranslation });
       appendButton(ele, {
         className: 'fas fa-sm fa-edit',
         title: formatTimestamp(timestamp),
