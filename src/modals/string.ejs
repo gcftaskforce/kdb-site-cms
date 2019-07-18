@@ -12,7 +12,7 @@
   }
 %>
 <div class="modal fade" id="modal" tabindex="-1" role="dialog" aria-labelledby="modal-title" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered" role="document">
+  <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
     <div class="modal-content">
       <div class="modal-header">
         <h5 class="modal-title" id="modal-title"><%= label %></h5>
@@ -24,15 +24,15 @@
         <form autocomplete="off" spellcheck="false" class="submission" data-id="<%= id %>">
           <div class="form-group">
             <label for="property-string"><%= label %></label>
-            <input
+            <textarea
+              rows="3"
               type="text"
               spellcheck="false"
               autocomplete="off"
               class="form-control entity-property"
               placeholder="Enter <%= label %>"
               id="property.string"
-              data-propertyname="<%= propertyBaseName %>"
-              value="<%= string %>">
+              data-propertyname="<%= propertyBaseName %>"><%- string %></textarea>
           </div>
         </form>
       </div>
