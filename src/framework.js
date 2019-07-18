@@ -90,6 +90,7 @@ module.exports = {
           },
         });
       });
+      appendTranslationBadge(ele, { isGoogleTranslation });
       appendButton(ele, {
         className: 'fas fa-sm fa-edit',
         title: formatTimestamp(timestamp),
@@ -99,7 +100,6 @@ module.exports = {
           propertyName,
         },
       });
-      appendTranslationBadge(ele, { isGoogleTranslation });
     });
   },
 };
