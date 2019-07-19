@@ -54,16 +54,10 @@ The button/badge panel is contextual in that its content varies slightly dependi
 The following screenshots illustrate the basic contextual panel.
 
 <p align="center">
-  <img src="https://raw.githubusercontent.com/gcftaskforce/kdb-site-cms/master/public/images/screenshots/cms_base.png" alt="General Editing" width="400">
-</p>
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/gcftaskforce/kdb-site-cms/master/public/images/screenshots/cms_text.png" alt="Text Editing" style="width:400px">
+  <img src="https://raw.githubusercontent.com/gcftaskforce/kdb-site-cms/master/public/images/screenshots/cms_base.png" alt="General Editing" width="800">
 </p>
 
 ![Text Editing](/public/images/screenshots/cms_text.png)
-
-___
 
 ![Partnership Overview](/public/images/screenshots/cms_partnership_overview.png)
 
