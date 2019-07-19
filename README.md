@@ -53,9 +53,7 @@ The button/badge panel is contextual in that its content varies slightly dependi
 
 The following screenshots illustrate the basic contextual panel.
 
-![General Editing](/public/images/screenshots/cms_base.png)
-
-___
+<img src="/public/images/screenshots/cms_base.png" alt="General Editing" style="width:200px; border: 2px solid #333;"/>
 
 ![Text Editing](/public/images/screenshots/cms_text.png)
 
