@@ -25,8 +25,11 @@ const SUMMERNOTE_CITATION_OPTIONS = {
 };
 
 module.exports = (modal, context = {}, onSubmit) => {
-  // clear any existing modals
-  if (document.getElementById('modal')) document.getElementById('modal').remove();
+  // remove any existing modals
+  const existingModal = document.getElementById('modal');
+  if (existingModal) {
+    existingModal.remove();
+  }
   const body = document.querySelector('body');
   // inject modal into DOM
   if (modal === undefined) return; // there isn't a modal for this kind

@@ -4,6 +4,7 @@ const appendButton = require('./lib/append-button');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
 const displayModal = require('./lib/display-modal');
+const clearModal = require('./lib/clear-modal');
 const reloadLocation = require('./lib/reload-location');
 const formatTimestamp = require('./lib/format-timestamp');
 
@@ -16,7 +17,8 @@ const onModalSave = () => {
   api.post('updateEntity', { id: data.id }, submission)
     .then((responseData) => {
       // console.log(responseData);
-      reloadLocation();
+      // reloadLocation();
+      clearModal();
     });
 };
 
