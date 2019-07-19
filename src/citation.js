@@ -3,8 +3,9 @@
 const appendButton = require('./lib/append-button');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
-const displayModal = require('./lib/display-modal');
+const clearModal = require('./lib/clear-modal');
 const reloadLocation = require('./lib/reload-location');
+const displayModal = require('./lib/display-modal');
 
 const modal = require('./modals/citation.ejs');
 
@@ -12,8 +13,10 @@ let api;
 
 const onModalSave = () => {
   const { data, submission } = parseForm();
+  clearModal();
   api.post('updateCitation', { id: data.id }, submission)
     .then((responseData) => {
+      // console.log(responseData);
       reloadLocation();
     });
 };

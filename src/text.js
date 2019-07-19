@@ -5,12 +5,15 @@ const appendTranslationBadge = require('./lib/append-translation-badge');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
 const displayModal = require('./lib/display-modal');
-const editModal = require('./modals/text.ejs');
-const confirmModal = require('./modals/translate-confirm.ejs');
+const clearModal = require('./lib/clear-modal');
 const reloadLocation = require('./lib/reload-location');
 const findTimestamp = require('./lib/find-timestamp');
 const formatTimestamp = require('./lib/format-timestamp');
 const isGoogleTimestamp = require('./lib/is-google-timestamp');
+
+// modals
+const editModal = require('./modals/text.ejs');
+const confirmModal = require('./modals/translate-confirm.ejs');
 
 /**
  * module-level variables "instantiated" in exported render() function
@@ -23,6 +26,7 @@ let SRC_LANGS;
 
 const onModalSave = () => {
   const { data, submission } = parseForm();
+  clearModal();
   const params = {
     id: data.id,
     lang: LANG,
@@ -43,24 +47,27 @@ const editOnClick = (evt) => {
     });
 };
 
+const onModalTranslate = (params) => {
+  clearModal();
+  api.post('translate', params)
+    .then(() => {
+      reloadLocation();
+    });
+};
+
 const translateOnClick = (evt) => {
   const target = evt.currentTarget;
   const id = target.getAttribute('data-id') || '';
   const fromLang = target.getAttribute('data-fromlang') || '';
   const toLang = target.getAttribute('data-tolang') || '';
   const propertyName = target.getAttribute('data-propertyname') || '';
-  displayModal(confirmModal, { fromLang, toLang }, () => {
-    const params = {
-      propertyName,
-      id,
-      fromLang,
-      toLang,
-    };
-    api.post('translate', params)
-      .then(() => {
-        reloadLocation();
-      });
-  });
+  const params = {
+    propertyName,
+    id,
+    fromLang,
+    toLang,
+  };
+  displayModal(confirmModal, { fromLang, toLang }, onModalTranslate.bind(null, params));
 };
 
 module.exports = {

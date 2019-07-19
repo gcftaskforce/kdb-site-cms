@@ -6,10 +6,12 @@ const appendDropdown = require('./lib/append-dropdown');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
 const displayModal = require('./lib/display-modal');
+const clearModal = require('./lib/clear-modal');
 const findTimestamp = require('./lib/find-timestamp');
 const formatTimestamp = require('./lib/format-timestamp');
 const isGoogleTimestamp = require('./lib/is-google-timestamp');
 const reloadLocation = require('./lib/reload-location');
+
 // modals and forms
 const stringModal = require('./modals/string.ejs');
 const confirmModal = require('./modals/translate-confirm.ejs');
@@ -34,6 +36,7 @@ let api;
 
 const onModalSaveJurisdictions = () => {
   const { data, submission } = parseForm();
+  clearModal();
   api.post('updateEntityProperty', { id: data.id }, submission)
     .then((responseData) => {
       // console.log(responseData);
@@ -43,6 +46,7 @@ const onModalSaveJurisdictions = () => {
 
 const onModalSaveString = (apiRouteName) => {
   const { data, submission } = parseForm();
+  clearModal();
   api.post(apiRouteName, { id: data.id, lang: LANG }, submission)
     .then((responseData) => {
       reloadLocation();

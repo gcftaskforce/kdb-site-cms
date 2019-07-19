@@ -14,11 +14,11 @@ let api;
 
 const onModalSave = () => {
   const { data, submission } = parseForm();
+  clearModal();
   api.post('updateEntity', { id: data.id }, submission)
     .then((responseData) => {
       // console.log(responseData);
-      // reloadLocation();
-      clearModal();
+      reloadLocation();
     });
 };
 

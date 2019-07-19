@@ -20,6 +20,7 @@ The CMS requirements evolved significantly in the years following the applicatio
 
 - Text fields of both plaintext and rich text (HTML) must be available for display and editing.
 - Text fields may be either translatable or not translatable.
+- If there is no translation for the currently selected language, English will be displayed. If there is no English translation, an attempt will be made to display content from any *supported language* before defaulting to an empty string.
 - For translatable text fields, the client must be able to edit content in all of the *supported languages*.
 - For translatable text fields, an *Instant Google Translate* feature having the capability to "instantly" perform a Google translation must be available. The *Instant Google Translate* feature must meet the following detailed requirements.
   - *Instant Google Translate* must be able to translate **to** any *supported languages*.
