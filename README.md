@@ -45,6 +45,8 @@ Note that timestamps were implemented in mid 2016. All extant data was timestamp
 
 The *Partnerships* database is a later addition to the *Knowledge Database*. In addition to the features outlined above, *insert* and *delete* capability must be provided.
 
+Partnerships introduce several additional considerations. These are detailed below using annotated screenshots.
+
 ## Implementation
 
 Implementation is accomplished by displaying a small contextual panel of buttons/badges for each *editable* field. Note that *derived* fields (e.g. *Deforestation Trend*) are not editable and do not display a contextual panel.
@@ -73,7 +75,7 @@ ___
 Notes:
 
 - All edits apply to the currently selected language (Portuguese).
-- *Instant Google Translate* feature is available for the *native language* (Spanish for Piura, Peru) and English
+- *Instant Google Translate* feature is available for both the *native language* (Spanish for Piura, Peru) as well as English
 
 ___
 
@@ -83,7 +85,7 @@ ___
 
 Partnerships introduce several additional considerations.
 
-When editing translated content for a given partnership, selecting a different language will cause the page position to be lost. The *jump to* feature (see top left red circle above) allows the user to switch between languages while keeping track of a given partnership in order to work with its translations.
+When editing translated content for a given partnership, selecting a different language will cause the page position to be lost. The *jump to* feature (see top left red circle annotation above) allows the user to switch between languages while keeping track of a given partnership in order to work with its translations.
 
 Additionally, note that each partnership corresponds to a **single** database record, which is cross listed for display on the KDB website. Any partnership is **always** listed under its member nation **plus** under the jurisdictions hilighted under the "Jurisdictions" heading.
 
