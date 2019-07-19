@@ -79,7 +79,7 @@ Notes:
 
 ___
 
-### Partnerships
+### Partnerships Editing
 
 ![Partnership Overview](/public/images/screenshots/cms_partnership_overview.png)
 
