@@ -59,8 +59,6 @@ The following screenshots illustrate the basic contextual panel.
 
 ![Partnership Overview](/public/images/screenshots/cms_partnership_overview.png)
 
-![Partnership Editing](/public/images/screenshots/cms_partnership.png)
-
 <!-- Furthermore, using the
 
 1. Speakers of the *native language* submit or enter content.
