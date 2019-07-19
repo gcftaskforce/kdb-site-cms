@@ -54,6 +54,8 @@ The button/badge panel is contextual in that its content varies slightly dependi
 
 The following screenshots illustrate the basic contextual panel.
 
+![General Editing](/public/images/screenshots/cms_base.png)
+
 <!-- Furthermore, using the
 
 1. Speakers of the *native language* submit or enter content.
@@ -61,14 +63,9 @@ The following screenshots illustrate the basic contextual panel.
 3. The English version can then be edited and cleaned up by an English speaker.
 4. All other supported languages can be translated using the *integrated Google translate* feature. -->
 
-
-
-#### Translation Status Indicator
+### Translation Status Indicator
 
 Translations made using the *integrated Google translate* feature are recorded and indicated as such. This alerts the client that improvements could likely be made to the content.
-
-
-
 
 ## Environment
 
