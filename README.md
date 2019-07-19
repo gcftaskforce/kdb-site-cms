@@ -53,26 +53,45 @@ The button/badge panel is contextual in that its content varies slightly dependi
 
 The following screenshots illustrate the basic contextual panel.
 
+### General Editing
+
 <p align="center">
-  <img src="https://raw.githubusercontent.com/gcftaskforce/kdb-site-cms/master/public/images/screenshots/cms_base.png" alt="General Editing" width="800">
+  <img src="https://raw.githubusercontent.com/gcftaskforce/kdb-site-cms/master/public/images/screenshots/cms_base.png" alt="General Editing" width="600">
 </p>
 
-![Text Editing](/public/images/screenshots/cms_text.png)
+Notes:
 
-![Partnership Overview](/public/images/screenshots/cms_partnership_overview.png)
+- Separate buttons for editing data/content and citations.
+- The "T" inside the yellow *translation badge* indicating a translatable field. A "G" indicates a raw Google translation.
 
 ___
 
-<!-- Furthermore, using the
+### Text/Translation Editing
 
-1. Speakers of the *native language* submit or enter content.
-2. The *Instant Google Translate* feature is then used to derive an English version.
-3. The English version can then be edited and cleaned up by an English speaker.
-4. All other supported languages can be translated using the *integrated Google translate* feature. -->
+![Text Editing](/public/images/screenshots/cms_text.png)
 
-### Translation Status Indicator
+Notes:
 
-Translations made using the *integrated Google translate* feature are recorded and indicated as such. This alerts the client that improvements could likely be made to the content.
+- All edits apply to the currently selected language (Portuguese).
+- *Instant Google Translate* feature is available for the *native language* (Spanish for Piura, Peru) and English
+
+___
+
+### Partnerships
+
+![Partnership Overview](/public/images/screenshots/cms_partnership_overview.png)
+
+Partnerships introduce several additional considerations.
+
+When editing translated content for a given partnership, selecting a different language will cause the page position to be lost. The *jump to* feature (see top left red circle above) allows the user to switch between languages while keeping track of a given partnership in order to work with its translations.
+
+Additionally, note that each partnership corresponds to a **single** database record, which is cross listed for display on the KDB website. Any partnership is **always** listed under its member nation **plus** under the jurisdictions hilighted under the "Jurisdictions" heading.
+
+Note the following:
+
+- Edits to a partnership will appear everywhere it's cross listed.
+- Deleting a partnership will delete it from everywhere it's cross listed.
+- Use the button beside "Jurisdictions" to add/remove jurisdictions.
 
 ## Environment
 
