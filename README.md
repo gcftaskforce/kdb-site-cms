@@ -54,8 +54,13 @@ The button/badge panel is contextual in that its content varies slightly dependi
 The following screenshots illustrate the basic contextual panel.
 
 <p align="center">
-  <img src="https://github.com/gcftaskforce/kdb-site-cms/public/images/screenshots/cms_base.png" alt="General Editing" width="400">
+  <img src="https://raw.github.com/gcftaskforce/kdb-site-cms/public/images/screenshots/cms_base.png" alt="General Editing" width="400">
 </p>
+
+<p align="center">
+  <img src="https://raw.github.com/gcftaskforce/kdb-site-cms/public/images/screenshots/cms_text.png" alt="Text Editing" style="width:400px">
+</p>
+
 ![Text Editing](/public/images/screenshots/cms_text.png)
 
 ___
