@@ -55,9 +55,15 @@ The following screenshots illustrate the basic contextual panel.
 
 ![General Editing](/public/images/screenshots/cms_base.png)
 
+___
+
 ![Text Editing](/public/images/screenshots/cms_text.png)
 
+___
+
 ![Partnership Overview](/public/images/screenshots/cms_partnership_overview.png)
+
+___
 
 <!-- Furthermore, using the
 
