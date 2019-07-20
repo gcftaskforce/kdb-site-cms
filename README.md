@@ -50,7 +50,7 @@ Partnerships introduce several additional considerations. These are detailed bel
 
 ## Implementation
 
-Implementation is accomplished by displaying a small contextual panel of buttons/badges for each *editable* field. Note that *derived* fields (e.g. *Deforestation Trend*) are not editable and do not display a contextual panel.
+Implementation is accomplished by displaying a small contextual panel ![Contextual Panel](/public/images/screenshots/cms_contextual_panel.png) of buttons/badges for each *editable* field. Note that *derived* fields (e.g. *Deforestation Trend*) are not editable and do not display a contextual panel.
 
 The button/badge panel is contextual in that its content varies slightly depending on the field's data type and whether the field is translatable and/or cited, as described above.
 
