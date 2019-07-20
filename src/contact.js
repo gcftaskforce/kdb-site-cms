@@ -1,4 +1,4 @@
-/* global document CLIENT_API_ENDPOINT */
+/* global document */
 
 const appendButton = require('./lib/append-button');
 const API = require('./lib/API');
@@ -7,6 +7,7 @@ const displayModal = require('./lib/display-modal');
 const clearModal = require('./lib/clear-modal');
 const reloadLocation = require('./lib/reload-location');
 const formatTimestamp = require('./lib/format-timestamp');
+const processError = require('./lib/process-error');
 
 const modal = require('./modals/contact.ejs');
 
@@ -16,9 +17,11 @@ const onModalSave = () => {
   const { data, submission } = parseForm();
   clearModal();
   api.post('updateEntity', { id: data.id }, submission)
-    .then((responseData) => {
-      // console.log(responseData);
+    .then(() => {
       reloadLocation();
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -28,6 +31,9 @@ const onClick = (evt) => {
   api.post('get', { id })
     .then((rec) => {
       displayModal(modal, { rec }, onModalSave);
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 

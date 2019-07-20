@@ -6,6 +6,7 @@ const parseForm = require('./lib/parse-form');
 const clearModal = require('./lib/clear-modal');
 const reloadLocation = require('./lib/reload-location');
 const displayModal = require('./lib/display-modal');
+const processError = require('./lib/process-error');
 
 const modal = require('./modals/citation.ejs');
 
@@ -15,9 +16,11 @@ const onModalSave = () => {
   const { data, submission } = parseForm();
   clearModal();
   api.post('updateCitation', { id: data.id }, submission)
-    .then((responseData) => {
-      // console.log(responseData);
+    .then(() => {
       reloadLocation();
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -27,6 +30,9 @@ const onClick = (evt) => {
   api.post('get', { id })
     .then((rec) => {
       displayModal(modal, { rec }, onModalSave);
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 

@@ -11,6 +11,7 @@ const findTimestamp = require('./lib/find-timestamp');
 const formatTimestamp = require('./lib/format-timestamp');
 const isGoogleTimestamp = require('./lib/is-google-timestamp');
 const reloadLocation = require('./lib/reload-location');
+const processError = require('./lib/process-error');
 
 // modals and forms
 const stringModal = require('./modals/string.ejs');
@@ -29,18 +30,15 @@ let REGION_ID;
 let LANG;
 let api;
 
-// // subheader contains the current region ID in a data attribute
-// const REGION_ID = (document.getElementById('subheader-regional'))
-//   ? document.getElementById('subheader-regional').getAttribute('data-regionid') || ''
-//   : '';
-
 const onModalSaveJurisdictions = () => {
   const { data, submission } = parseForm();
   clearModal();
   api.post('updateEntityProperty', { id: data.id }, submission)
-    .then((responseData) => {
-      // console.log(responseData);
+    .then(() => {
       reloadLocation();
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -48,8 +46,11 @@ const onModalSaveString = (apiRouteName) => {
   const { data, submission } = parseForm();
   clearModal();
   api.post(apiRouteName, { id: data.id, lang: LANG }, submission)
-    .then((responseData) => {
+    .then(() => {
       reloadLocation();
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -64,10 +65,16 @@ const deleteOnClick = (evt) => {
     .then((rec) => {
       displayModal(deleteConfirmModal, { rec }, () => {
         api.post('delete', { id })
-          .then((responseData) => {
+          .then(() => {
             reloadLocation();
+          })
+          .catch((err) => {
+            processError(err);
           });
       });
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -77,6 +84,9 @@ const jurisdictionEditOnClick = (evt) => {
   api.post('get', { id, lang: LANG })
     .then((rec) => {
       displayModal(jurisdictionListModal, { rec }, onModalSaveJurisdictions);
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -91,6 +101,9 @@ const stringEditOnClick = (evt) => {
   api.post('get', { id, lang: LANG })
     .then((rec) => {
       displayModal(stringModal, { rec, propertyName }, onModalSaveString.bind(null, apiRouteName));
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -111,6 +124,9 @@ const translateOnClick = (evt) => {
     api.post('translate', params)
       .then(() => {
         reloadLocation(id);
+      })
+      .catch((err) => {
+        processError(err);
       });
   });
 };
@@ -118,7 +134,9 @@ const translateOnClick = (evt) => {
 module.exports = {
   render: (props) => {
     api = new API(props.API_ENDPOINT);
-    ({ LANGS, SRC_LANGS, LANG, REGION_ID } = props);
+    ({
+      LANGS, SRC_LANGS, LANG, REGION_ID,
+    } = props);
 
     /**
      * Process each partnership on the page
@@ -225,6 +243,9 @@ module.exports = {
         api.post('insert', params, submission)
           .then((responseData) => {
             reloadLocation(responseData.id);
+          })
+          .catch((err) => {
+            processError(err);
           });
       };
       document.getElementById('partnership-add').addEventListener('click', addOnClick);

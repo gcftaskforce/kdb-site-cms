@@ -28,8 +28,11 @@ module.exports = class API {
     const uri = `${this.API_ENDPOINT}/${methodName}${query}`;
     return fetch(uri, options)
       .then((res) => {
-        if (!res.ok) return {}; // TODO: PROCESS ERROR
-        return res.json();
+        if (!res.ok) return Promise.reject(new Error(res.status)); // the caller will need to "catch" this
+        // check for JSON content
+        const contentType = res.headers.get('content-type');
+        if (contentType && contentType.includes('application/json')) return res.json(); // <-- this is a promise!
+        return {};
       });
   }
 };

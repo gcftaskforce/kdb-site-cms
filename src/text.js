@@ -10,6 +10,7 @@ const reloadLocation = require('./lib/reload-location');
 const findTimestamp = require('./lib/find-timestamp');
 const formatTimestamp = require('./lib/format-timestamp');
 const isGoogleTimestamp = require('./lib/is-google-timestamp');
+const processError = require('./lib/process-error');
 
 // modals
 const editModal = require('./modals/text.ejs');
@@ -32,8 +33,11 @@ const onModalSave = () => {
     lang: LANG,
   };
   api.post('updateTranslation', params, submission)
-    .then((responseData) => {
+    .then(() => {
       reloadLocation();
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -44,6 +48,9 @@ const editOnClick = (evt) => {
   api.post('get', { id, lang: LANG })
     .then((rec) => {
       displayModal(editModal, { rec, propertyName }, onModalSave);
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
@@ -52,6 +59,9 @@ const onModalTranslate = (params) => {
   api.post('translate', params)
     .then(() => {
       reloadLocation();
+    })
+    .catch((err) => {
+      processError(err);
     });
 };
 
