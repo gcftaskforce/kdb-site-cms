@@ -54,7 +54,13 @@ Implementation is accomplished by displaying a small contextual panel ![Contextu
 
 The button/badge panel is contextual in that its content varies slightly depending on the field's data type and whether the field is translatable and/or cited, as described above.
 
-The following screenshots illustrate the basic contextual panel.
+Additionally, hovering over a contextual panel's "edit" button reveals the field's timestamp.
+
+<p align="center">
+  <img src="https://raw.githubusercontent.com/gcftaskforce/kdb-site-cms/master/public/images/screenshots/cms_timestamp.png" alt="General Editing" width="500">
+</p>
+
+The following annotated screenshots illustrate use of the contextual panel as well as important considerations when editing KDB data/content.
 
 ### General Editing
 
