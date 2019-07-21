@@ -2,6 +2,19 @@
 
 'use strict';
 
+class CustomError extends Error {
+  constructor(code = 'GENERIC', status = 500, ...params) {
+    super(...params);
+
+    if (Error.captureStackTrace) {
+      Error.captureStackTrace(this, CustomError);
+    }
+
+    this.code = code;
+    this.status = status;
+  }
+}
+
 const FETCH_OPTIONS = {
   method: 'POST',
   mode: 'cors',
@@ -28,11 +41,17 @@ module.exports = class API {
     const uri = `${this.API_ENDPOINT}/${methodName}${query}`;
     return fetch(uri, options)
       .then((res) => {
-        if (!res.ok) return Promise.reject(new Error(res.status)); // the caller will need to "catch" this
-        // check for JSON content
-        const contentType = res.headers.get('content-type');
-        if (contentType && contentType.includes('application/json')) return res.json(); // <-- this is a promise!
-        return {};
+        if (res.ok) {
+          // check for JSON content
+          const contentType = res.headers.get('content-type');
+          if (contentType && contentType.includes('application/json')) return res.json(); // <-- this is a promise!
+          return {};
+        }
+        // not OK!
+        return Promise.reject(new CustomError(undefined, res.status, res.statusText)); // passed to catch (below)
+      })
+      .catch((err) => {
+        return Promise.reject(new CustomError(undefined, err.status, err.message)); // the caller will need to "catch" this
       });
   }
 };
