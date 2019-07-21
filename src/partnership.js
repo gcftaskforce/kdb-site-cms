@@ -1,4 +1,6 @@
-/* global window document */
+/* global document */
+
+'use strict';
 
 const appendButton = require('./lib/append-button');
 const appendTranslationBadge = require('./lib/append-translation-badge');
@@ -12,6 +14,7 @@ const formatTimestamp = require('./lib/format-timestamp');
 const isGoogleTimestamp = require('./lib/is-google-timestamp');
 const reloadLocation = require('./lib/reload-location');
 const processError = require('./lib/process-error');
+const scrollWindow = require('./lib/scroll-window');
 
 // modals and forms
 const stringModal = require('./modals/string.ejs');
@@ -249,28 +252,7 @@ module.exports = {
           });
       };
       document.getElementById('partnership-add').addEventListener('click', addOnClick);
-
-      /**
-       * Check for "scroll"
-      */
-
-      if (window.location.search) {
-        const params = {};
-        window.location.search.substring(1).split('&').forEach((paramString) => {
-          const [key, value] = paramString.split('=');
-          params[key] = value;
-        });
-        if (params.scrollTo) {
-          const ele = document.getElementById(params.scrollTo);
-          if (ele) {
-            ele.scrollIntoView();
-            // clear the search params
-            let href = window.location.origin;
-            if (window.location.pathname) href += window.location.pathname;
-            window.history.replaceState({ id: params.scrollTo }, '', href);
-          }
-        }
-      }
+      scrollWindow();
     }
   },
 };

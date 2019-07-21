@@ -1,5 +1,7 @@
 /* global document */
 
+'use strict';
+
 const appendButton = require('./lib/append-button');
 const API = require('./lib/API');
 const parseForm = require('./lib/parse-form');
