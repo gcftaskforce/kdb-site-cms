@@ -1,7 +1,5 @@
 # GCF Task Force Knowledge Database (CMS Component)
 
-The KDB Content Management System (CMS) is a browser-side (webpack/babel compiled) Javascript application. Users are authenticated by the KDB Website [https://github.com/gcftaskforce/kdb-site](https://github.com/gcftaskforce/kdb-site), which then enables inline CMS functionality for authorized users. Full CMS functionality is achieved by injecting buttons, forms, and modals into the base website. Since session state is shared between the website and [API](https://github.com/gcftaskforce/kdb-api), the API is able to authorize POST requests from the CMS.
-
 ## Terms
 
 - *supported languages* refers to the collected languages of all the member nations (currently **en**, **es**, **fr**, **id**, **pt**).
@@ -101,6 +99,10 @@ Note the following:
 - Edits to a partnership will appear everywhere it's cross listed.
 - Deleting a partnership will delete it from everywhere it's cross listed.
 - Use the button beside "Jurisdictions" to add/remove jurisdictions.
+
+## Technical Overview
+
+The KDB Content Management System (CMS) is a browser-side (webpack/babel compiled) Javascript application. Users are authenticated by the KDB Website [https://github.com/gcftaskforce/kdb-site](https://github.com/gcftaskforce/kdb-site), which then enables inline CMS functionality for authorized users. Full CMS functionality is achieved by injecting buttons, forms, and modals into the base website. Since session state is shared between the website and [API](https://github.com/gcftaskforce/kdb-api), the API is able to authorize POST requests from the CMS.
 
 ## Environment
 
