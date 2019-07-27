@@ -48,7 +48,9 @@ module.exports = class API {
           return {};
         }
         // not OK!
-        return Promise.reject(new CustomError(undefined, res.status, res.statusText)); // passed to catch (below)
+        return res.text().then((text) => {
+          return Promise.reject(new CustomError(undefined, res.status, text)); // passed to catch (below)
+        });
       })
       .catch((err) => {
         return Promise.reject(new CustomError(undefined, err.status, err.message)); // the caller will need to "catch" this
